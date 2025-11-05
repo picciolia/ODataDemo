@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  odata-demo:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    volumes:
+      # Opzionale: mount per lo sviluppo
+      - ./appsettings.Development.json:/app/appsettings.Development.json:ro
+    restart: unless-stopped
+
+  # Opzionale: aggiungere un database SQL Server se necessario
+  # sqlserver:
+  #   image: mcr.microsoft.com/mssql/server:2022-latest
+  #   environment:
+  #     - ACCEPT_EULA=Y
+  #     - SA_PASSWORD=YourPassword123!
+  #   ports:
+  #     - "1433:1433"
+  #   volumes:
+  #     - sqlserver_data:/var/opt/mssql
+
+# volumes:
+#   sqlserver_data:
